@@ -60,3 +60,12 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
 - Replaced modern glassmorphism design with clean, classic UI
 - Simplified styling: removed animations, gradients, and fancy effects
 - Final design: Professional minimalist interface with blue accents
+- November 30, 2025: Enhanced UI/UX:
+  - Added chemistry-themed background to login/signup pages
+  - Made auth cards 40% transparent for better background visibility
+  - Highlighted text with shadows for improved readability
+  - Redesigned chat page with gradients, improved spacing, animations
+  - Added shadow effects and better visual hierarchy
+  - Improved typography and button styling throughout
+  - Added slide-in animations for chat messages
+  - Enhanced sidebar with gradient background and better styling
