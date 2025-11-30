@@ -23,7 +23,7 @@ This creates `frontend/dist/` with all static files.
    - **Environment**: Select **python3**
    - **Build Command**: 
      ```
-     cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt
+     bash build.sh
      ```
    - **Start Command**: 
      ```

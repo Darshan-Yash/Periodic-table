@@ -1,0 +1,94 @@
+==> Cloning from https://github.com/Darshan-Yash/Periodic-table
+==> Checking out commit 6ae1641199b06bccc428610e281a08598cf99ad9 in branch main
+==> Installing Python version 3.13.4...
+==> Using Python version 3.13.4 (default)
+==> Docs on specifying a Python version: https://render.com/docs/python-version
+==> Using Poetry version 2.1.3 (default)
+==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+==> Running build command 'cd frontend && npm install && npm run build && cd ../backend && pip install -r requirements.txt'...
+==> Using Node.js version 22.16.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+added 184 packages, and audited 185 packages in 3s
+40 packages are looking for funding
+  run `npm fund` for details
+found 0 vulnerabilities
+> frontend@0.0.0 build
+> vite build
+vite v7.2.4 building client environment for production...
+transforming...
+✓ 96 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.29 kB
+dist/assets/index-DVcs7-6-.css    7.02 kB │ gzip:  1.94 kB
+dist/assets/index-D2rM12mU.js   270.65 kB │ gzip: 89.02 kB
+✓ built in 1.35s
+Collecting fastapi==0.104.1 (from -r requirements.txt (line 1))
+  Downloading fastapi-0.104.1-py3-none-any.whl.metadata (24 kB)
+Collecting uvicorn==0.24.0 (from -r requirements.txt (line 2))
+  Downloading uvicorn-0.24.0-py3-none-any.whl.metadata (6.4 kB)
+Collecting httpx==0.25.0 (from -r requirements.txt (line 3))
+  Downloading httpx-0.25.0-py3-none-any.whl.metadata (7.6 kB)
+Collecting passlib==1.7.4 (from -r requirements.txt (line 4))
+  Downloading passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting psycopg2-binary==2.9.9 (from -r requirements.txt (line 5))
+  Downloading psycopg2-binary-2.9.9.tar.gz (384 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting pydantic==2.0.3 (from -r requirements.txt (line 6))
+  Downloading pydantic-2.0.3-py3-none-any.whl.metadata (128 kB)
+Collecting PyJWT==2.10.1 (from -r requirements.txt (line 7))
+  Downloading PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+Collecting python-multipart==0.0.6 (from -r requirements.txt (line 8))
+  Downloading python_multipart-0.0.6-py3-none-any.whl.metadata (2.5 kB)
+Collecting anyio<4.0.0,>=3.7.1 (from fastapi==0.104.1->-r requirements.txt (line 1))
+  Downloading anyio-3.7.1-py3-none-any.whl.metadata (4.7 kB)
+Collecting starlette<0.28.0,>=0.27.0 (from fastapi==0.104.1->-r requirements.txt (line 1))
+  Downloading starlette-0.27.0-py3-none-any.whl.metadata (5.8 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi==0.104.1->-r requirements.txt (line 1))
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting annotated-types>=0.4.0 (from pydantic==2.0.3->-r requirements.txt (line 6))
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.3.0 (from pydantic==2.0.3->-r requirements.txt (line 6))
+  Downloading pydantic_core-2.3.0.tar.gz (308 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'error'
+  error: subprocess-exited-with-error
+  
+  × Preparing metadata (pyproject.toml) did not run successfully.
+  │ exit code: 1
+  ╰─> [14 lines of output]
+          Updating crates.io index
+      warning: failed to write cache, path: /usr/local/cargo/registry/index/index.crates.io-1949cf8c6b5b557f/.cache/ah/as/ahash, error: Read-only file system (os error 30)
+       Downloading crates ...
+        Downloaded redox_syscall v0.3.5
+      error: failed to create directory `/usr/local/cargo/registry/cache/index.crates.io-1949cf8c6b5b557f`
+      
+      Caused by:
+        Read-only file system (os error 30)
+      💥 maturin failed
+        Caused by: Cargo metadata failed. Does your crate compile with `cargo build`?
+        Caused by: `cargo metadata` exited with an error:
+      Error running maturin: Command '['maturin', 'pep517', 'write-dist-info', '--metadata-directory', '/tmp/pip-modern-metadata-bmolwl1b', '--interpreter', '/opt/render/project/src/.venv/bin/python3.13']' returned non-zero exit status 1.
+      Checking for Rust toolchain....
+      Running `maturin pep517 write-dist-info --metadata-directory /tmp/pip-modern-metadata-bmolwl1b --interpreter /opt/render/project/src/.venv/bin/python3.13`
+      [end of output]
+  
+  note: This error originates from a subprocess, and is likely not a problem with pip.
+[notice] A new release of pip is available: 25.1.1 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+error: metadata-generation-failed
+× Encountered error while generating package metadata.
+╰─> See above for output.
+note: This is an issue with the package mentioned above, not pip.
+hint: See above for details.
+==> Build failed 😞
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
