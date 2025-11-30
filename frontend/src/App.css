@@ -29,7 +29,7 @@ html, body {
   justify-content: center;
   padding: 20px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-image: url('https://images.unsplash.com/photo-1576158622080-11b0b0a6c850?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-image: url('https://images.unsplash.com/photo-1576091160550-112173f9f4ee?w=1920&q=80');
   background-size: cover;
   background-position: center;
   position: relative;
@@ -43,7 +43,7 @@ html, body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.75) 0%, rgba(118, 75, 162, 0.75) 100%);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.6) 0%, rgba(118, 75, 162, 0.6) 100%);
   z-index: 1;
 }
 
@@ -175,7 +175,7 @@ html, body {
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-image: url('https://images.unsplash.com/photo-1576158622080-11b0b0a6c850?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+  background-image: url('https://images.unsplash.com/photo-1576158622080-11b0b0a6c850?w=1920&q=80');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
