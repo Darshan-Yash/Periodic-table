@@ -302,12 +302,36 @@ app.include_router(router)
 
 # Serve static frontend files
 frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
-if os.path.exists(frontend_dist_path):
+
+# Debug: Check if path exists
+if not os.path.exists(frontend_dist_path):
+    print(f"⚠️ Frontend dist path not found at: {frontend_dist_path}")
+    print(f"Current working directory: {os.getcwd()}")
+    print(f"Backend directory: {os.path.dirname(__file__)}")
+    
+    # Try alternative path
+    alt_path = "/opt/render/project/src/frontend/dist"
+    if os.path.exists(alt_path):
+        print(f"✓ Found dist at alternative path: {alt_path}")
+        frontend_dist_path = alt_path
+    else:
+        print(f"⚠️ Alternative path also not found: {alt_path}")
+        # List what's actually there
+        try:
+            parent = os.path.dirname(frontend_dist_path)
+            print(f"Contents of {parent}: {os.listdir(parent) if os.path.exists(parent) else 'Not found'}")
+        except:
+            pass
+
+if os.path.exists(frontend_dist_path) and os.path.exists(os.path.join(frontend_dist_path, "index.html")):
+    print(f"✓ Mounting static files from: {frontend_dist_path}")
     app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="static")
 else:
+    # Fallback for development
+    print(f"⚠️ Frontend not ready. Creating fallback endpoint.")
     @app.get("/{full_path:path}")
     async def fallback(full_path: str):
-        return {"message": "Frontend not built yet. Run 'npm run build' in frontend folder."}
+        return FileResponse("../frontend/dist/index.html") if os.path.exists("../frontend/dist/index.html") else {"message": "Frontend not built. Please check build process."}
 
 if __name__ == "__main__":
     import uvicorn
