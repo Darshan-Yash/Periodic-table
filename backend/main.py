@@ -5,6 +5,8 @@ from datetime import datetime, timedelta
 from typing import Optional
 from fastapi import FastAPI, HTTPException, Depends, status, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, EmailStr
 from passlib.hash import pbkdf2_sha256
@@ -297,6 +299,15 @@ If element data is provided, use it to give accurate information."""
 
 
 app.include_router(router)
+
+# Serve static frontend files
+frontend_dist_path = os.path.join(os.path.dirname(__file__), "..", "frontend", "dist")
+if os.path.exists(frontend_dist_path):
+    app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="static")
+else:
+    @app.get("/{full_path:path}")
+    async def fallback(full_path: str):
+        return {"message": "Frontend not built yet. Run 'npm run build' in frontend folder."}
 
 if __name__ == "__main__":
     import uvicorn
