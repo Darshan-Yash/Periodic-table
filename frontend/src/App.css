@@ -28,10 +28,10 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%),
-              repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
-  background-size: cover, cover;
+  background: url('/chemistry-bg.png');
+  background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -43,7 +43,7 @@ html, body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.4) 100%);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.5) 0%, rgba(118, 75, 162, 0.5) 100%);
   z-index: 1;
 }
 
@@ -174,13 +174,11 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: 
-    radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
-    repeating-linear-gradient(-45deg, #667eea, #667eea 10px, #5a68d4 10px, #5a68d4 20px),
-    linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-size: cover, cover, cover, cover;
+  background: url('/chemistry-bg.png');
+  background-size: cover;
+  background-position: center;
   background-attachment: fixed;
+  background-repeat: no-repeat;
   overflow: hidden;
 }
 
