@@ -28,9 +28,9 @@ html, body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-image: url('https://images.unsplash.com/photo-1576091160550-112173f9f4ee?w=1920&q=80');
-  background-size: cover;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%),
+              repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.05) 35px, rgba(255,255,255,.05) 70px);
+  background-size: cover, cover;
   background-position: center;
   position: relative;
   overflow: hidden;
@@ -43,7 +43,7 @@ html, body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.6) 0%, rgba(118, 75, 162, 0.6) 100%);
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.4) 0%, rgba(118, 75, 162, 0.4) 100%);
   z-index: 1;
 }
 
@@ -174,10 +174,12 @@ html, body {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-image: url('https://images.unsplash.com/photo-1576158622080-11b0b0a6c850?w=1920&q=80');
-  background-size: cover;
-  background-position: center;
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(102, 126, 234, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(118, 75, 162, 0.3) 0%, transparent 50%),
+    repeating-linear-gradient(-45deg, #667eea, #667eea 10px, #5a68d4 10px, #5a68d4 20px),
+    linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-size: cover, cover, cover, cover;
   background-attachment: fixed;
   overflow: hidden;
 }
