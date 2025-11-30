@@ -1,0 +1,211 @@
+==> Cloning from https://github.com/Darshan-Yash/Periodic-table
+==> Checking out commit b31ae5a3003e311ec540c7f5f76b89f528948edb in branch main
+==> Installing Python version 3.13.4...
+==> Using Python version 3.13.4 (default)
+==> Docs on specifying a Python version: https://render.com/docs/python-version
+==> Using Poetry version 2.1.3 (default)
+==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
+==> Running build command 'bash build.sh'...
+Building frontend...
+==> Using Node.js version 22.16.0 (default)
+==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+added 184 packages, and audited 185 packages in 3s
+40 packages are looking for funding
+  run `npm fund` for details
+found 0 vulnerabilities
+> frontend@0.0.0 build
+> vite build
+vite v7.2.4 building client environment for production...
+transforming...
+✓ 96 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:  0.29 kB
+dist/assets/index-DVcs7-6-.css    7.02 kB │ gzip:  1.94 kB
+dist/assets/index-BnVGjxft.js   270.70 kB │ gzip: 89.04 kB
+✓ built in 1.39s
+Installing Python dependencies (prebuilt wheels only)...
+Collecting fastapi>=0.104 (from -r requirements.txt (line 1))
+  Downloading fastapi-0.122.1-py3-none-any.whl.metadata (30 kB)
+Collecting uvicorn>=0.24 (from -r requirements.txt (line 2))
+  Downloading uvicorn-0.38.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting httpx>=0.25 (from -r requirements.txt (line 3))
+  Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting passlib>=1.7 (from -r requirements.txt (line 4))
+  Downloading passlib-1.7.4-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting psycopg2-binary>=2.9 (from -r requirements.txt (line 5))
+  Downloading psycopg2_binary-2.9.11-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (4.9 kB)
+Collecting pydantic>=2.5 (from -r requirements.txt (line 6))
+  Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+Collecting PyJWT>=2.8 (from -r requirements.txt (line 7))
+  Downloading PyJWT-2.10.1-py3-none-any.whl.metadata (4.0 kB)
+Collecting python-multipart>=0.0.5 (from -r requirements.txt (line 8))
+  Downloading python_multipart-0.0.20-py3-none-any.whl.metadata (1.8 kB)
+Collecting starlette<0.51.0,>=0.40.0 (from fastapi>=0.104->-r requirements.txt (line 1))
+  Downloading starlette-0.50.0-py3-none-any.whl.metadata (6.3 kB)
+Collecting typing-extensions>=4.8.0 (from fastapi>=0.104->-r requirements.txt (line 1))
+  Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting annotated-doc>=0.0.2 (from fastapi>=0.104->-r requirements.txt (line 1))
+  Downloading annotated_doc-0.0.4-py3-none-any.whl.metadata (6.6 kB)
+Collecting annotated-types>=0.6.0 (from pydantic>=2.5->-r requirements.txt (line 6))
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.41.5 (from pydantic>=2.5->-r requirements.txt (line 6))
+  Downloading pydantic_core-2.41.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+Collecting typing-inspection>=0.4.2 (from pydantic>=2.5->-r requirements.txt (line 6))
+  Downloading typing_inspection-0.4.2-py3-none-any.whl.metadata (2.6 kB)
+Collecting anyio<5,>=3.6.2 (from starlette<0.51.0,>=0.40.0->fastapi>=0.104->-r requirements.txt (line 1))
+  Downloading anyio-4.12.0-py3-none-any.whl.metadata (4.3 kB)
+Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette<0.51.0,>=0.40.0->fastapi>=0.104->-r requirements.txt (line 1))
+  Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+Collecting click>=7.0 (from uvicorn>=0.24->-r requirements.txt (line 2))
+  Downloading click-8.3.1-py3-none-any.whl.metadata (2.6 kB)
+Collecting h11>=0.8 (from uvicorn>=0.24->-r requirements.txt (line 2))
+  Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+Collecting certifi (from httpx>=0.25->-r requirements.txt (line 3))
+  Downloading certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+Collecting httpcore==1.* (from httpx>=0.25->-r requirements.txt (line 3))
+  Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+Downloading fastapi-0.122.1-py3-none-any.whl (110 kB)
+Downloading pydantic-2.12.5-py3-none-any.whl (463 kB)
+Downloading pydantic_core-2.41.5-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 4.6 MB/s eta 0:00:00
+Downloading starlette-0.50.0-py3-none-any.whl (74 kB)
+Downloading anyio-4.12.0-py3-none-any.whl (113 kB)
+Downloading uvicorn-0.38.0-py3-none-any.whl (68 kB)
+Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+Downloading passlib-1.7.4-py2.py3-none-any.whl (525 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 525.6/525.6 kB 745.0 kB/s eta 0:00:00
+Downloading psycopg2_binary-2.9.11-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.2/4.2 MB 10.1 MB/s eta 0:00:00
+Downloading PyJWT-2.10.1-py3-none-any.whl (22 kB)
+Downloading python_multipart-0.0.20-py3-none-any.whl (24 kB)
+Downloading annotated_doc-0.0.4-py3-none-any.whl (5.3 kB)
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading click-8.3.1-py3-none-any.whl (108 kB)
+Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+Downloading idna-3.11-py3-none-any.whl (71 kB)
+Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+Downloading typing_inspection-0.4.2-py3-none-any.whl (14 kB)
+Downloading certifi-2025.11.12-py3-none-any.whl (159 kB)
+Installing collected packages: passlib, typing-extensions, python-multipart, PyJWT, psycopg2-binary, idna, h11, click, certifi, annotated-types, annotated-doc, uvicorn, typing-inspection, pydantic-core, httpcore, anyio, starlette, pydantic, httpx, fastapi
+Successfully installed PyJWT-2.10.1 annotated-doc-0.0.4 annotated-types-0.7.0 anyio-4.12.0 certifi-2025.11.12 click-8.3.1 fastapi-0.122.1 h11-0.16.0 httpcore-1.0.9 httpx-0.28.1 idna-3.11 passlib-1.7.4 psycopg2-binary-2.9.11 pydantic-2.12.5 pydantic-core-2.41.5 python-multipart-0.0.20 starlette-0.50.0 typing-extensions-4.15.0 typing-inspection-0.4.2 uvicorn-0.38.0
+[notice] A new release of pip is available: 25.1.1 -> 25.3
+[notice] To update, run: pip install --upgrade pip
+Build complete!
+==> Uploading build...
+==> Uploaded in 9.2s. Compression took 3.6s
+==> Build successful 🎉
+==> Deploying...
+==> Running 'cd backend && python main.py'
+Traceback (most recent call last):
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/networks.py", line 965, in import_email_validator
+    import email_validator
+ModuleNotFoundError: No module named 'email_validator'
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/opt/render/project/src/backend/main.py", line 44, in <module>
+    class UserSignup(BaseModel):
+        email: EmailStr
+        password: str
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_model_construction.py", line 255, in __new__
+    complete_model_class(
+    ~~~~~~~~~~~~~~~~~~~~^
+        cls,
+        ^^^^
+    ...<3 lines>...
+        create_model_module=_create_model_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_model_construction.py", line 648, in complete_model_class
+    schema = gen_schema.generate_schema(cls)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 729, in generate_schema
+    schema = self._generate_schema_inner(obj)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 1023, in _generate_schema_inner
+    return self._model_schema(obj)
+           ~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 856, in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 1228, in _generate_md_field_schema
+    schema, metadata = self._common_field_schema(name, field_info, decorators)
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 1282, in _common_field_schema
+    schema = self._apply_annotations(
+        source_type,
+        annotations + validators_from_decorators,
+    )
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 2227, in _apply_annotations
+    schema = get_inner_schema(source_type)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_schema_generation_shared.py", line 83, in __call__
+    schema = self._handler(source_type)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 2203, in inner_handler
+    schema = self._generate_schema_from_get_schema_method(obj, source_type)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 919, in _generate_schema_from_get_schema_method
+    schema = get_schema(
+        source, CallbackGetCoreSchemaHandler(self._generate_schema_inner, self, ref_mode=ref_mode)
+    )
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/networks.py", line 1005, in __get_pydantic_core_schema__
+    import_email_validator()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/networks.py", line 967, in import_email_validator
+    raise ImportError("email-validator is not installed, run `pip install 'pydantic[email]'`") from e
+ImportError: email-validator is not installed, run `pip install 'pydantic[email]'`
+==> Exited with status 1
+==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys
+==> Running 'cd backend && python main.py'
+Traceback (most recent call last):
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/networks.py", line 965, in import_email_validator
+    import email_validator
+ModuleNotFoundError: No module named 'email_validator'
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/opt/render/project/src/backend/main.py", line 44, in <module>
+    class UserSignup(BaseModel):
+        email: EmailStr
+        password: str
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_model_construction.py", line 255, in __new__
+    complete_model_class(
+    ~~~~~~~~~~~~~~~~~~~~^
+        cls,
+        ^^^^
+    ...<3 lines>...
+        create_model_module=_create_model_module,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_model_construction.py", line 648, in complete_model_class
+    schema = gen_schema.generate_schema(cls)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 729, in generate_schema
+    schema = self._generate_schema_inner(obj)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 1023, in _generate_schema_inner
+    return self._model_schema(obj)
+           ~~~~~~~~~~~~~~~~~~^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 856, in _model_schema
+    {k: self._generate_md_field_schema(k, v, decorators) for k, v in fields.items()},
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 1228, in _generate_md_field_schema
+    schema, metadata = self._common_field_schema(name, field_info, decorators)
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 1282, in _common_field_schema
+    schema = self._apply_annotations(
+        source_type,
+        annotations + validators_from_decorators,
+    )
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 2227, in _apply_annotations
+    schema = get_inner_schema(source_type)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_schema_generation_shared.py", line 83, in __call__
+    schema = self._handler(source_type)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 2203, in inner_handler
+    schema = self._generate_schema_from_get_schema_method(obj, source_type)
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/_internal/_generate_schema.py", line 919, in _generate_schema_from_get_schema_method
+    schema = get_schema(
+        source, CallbackGetCoreSchemaHandler(self._generate_schema_inner, self, ref_mode=ref_mode)
+    )
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/networks.py", line 1005, in __get_pydantic_core_schema__
+    import_email_validator()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/opt/render/project/src/.venv/lib/python3.13/site-packages/pydantic/networks.py", line 967, in import_email_validator
+    raise ImportError("email-validator is not installed, run `pip install 'pydantic[email]'`") from e
+ImportError: email-validator is not installed, run `pip install 'pydantic[email]'`
