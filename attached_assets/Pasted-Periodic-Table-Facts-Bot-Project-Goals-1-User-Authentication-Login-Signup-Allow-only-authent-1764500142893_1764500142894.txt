@@ -1,0 +1,129 @@
+Periodic Table Facts Bot – Project Goals
+1. User Authentication (Login & Signup)
+
+Allow only authenticated users to access the bot.
+
+Simple, email-based sign-up and login system.
+
+Passwords stored securely using hashing (pbkdf2_sha256).
+
+Backend generates JWT tokens; frontend stores them and sends them with each request.
+
+2. Periodic Table Element Lookup
+
+Users can search any element by:
+
+Symbol (H, He, Na…)
+
+Name (Hydrogen, Helium, etc.)
+
+The bot returns:
+
+Atomic number
+
+Atomic weight
+
+Group & period
+
+State at STP
+
+Electron configuration
+
+Density
+
+This is provided by your local elements.json dataset.
+
+3. AI-Generated Facts (Using OpenRouter API)
+
+User asks a question like:
+
+“Tell me a fun fact about Carbon.”
+
+“Explain why noble gases don’t react much.”
+
+Backend sends the question + element info to OpenRouter LLM.
+
+LLM replies with a clean, safe, factual answer.
+
+Only authenticated users can chat with the bot.
+
+4. Frontend Application (Vite + React)
+
+Modern, simple UI built with Vite + React.
+
+Pages:
+
+Login
+
+Signup
+
+Home / Chat
+
+Element Browser (optional)
+
+Chat interface similar to ChatGPT but simple:
+
+User types a question.
+
+Frontend sends question + token to backend.
+
+Backend replies with the bot’s answer.
+
+5. Backend (FastAPI)
+
+Your backend supports:
+
+JWT authentication (/signup, /login, /me)
+
+Element lookup (/elements, /elements/{symbol})
+
+AI answer endpoint (/ask) → will connect to OpenRouter
+
+CORS enabled to allow frontend requests
+
+Local JSON dataset (no external DB unless needed)
+
+No deployment (entirely local project)
+
+6. Local-Only System
+
+No deployment required
+
+Runs fully on your machine:
+
+FastAPI backend → localhost:8000
+
+React frontend → localhost:5173
+
+Only you can create accounts (closed system)
+
+7. Clean Project Structure
+periodic-facts-bot/
+│── backend/
+│     ├── main.py
+│     ├── elements.json
+│     ├── users.db
+│     ├── .venv/
+│
+│── frontend/
+      ├── src/
+      │     ├── pages/
+      │     ├── components/
+      │     ├── api/
+      └── vite.config.js
+
+8. Final Features (Output)
+
+At the end, your project will allow a user (you only) to:
+
+Sign up & log in
+
+Chat with an LLM about periodic table topics
+
+Get data-rich element facts instantly
+
+Explore the periodic table
+
+Experience a real AI chatbot built fully by you
+
+No external database unless you choose (Neon optional)
