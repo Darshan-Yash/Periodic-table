@@ -53,9 +53,14 @@ The application runs both backend (port 8000) and frontend (port 5000) together.
 Frontend is accessible via the webview. The Vite dev server proxies /api requests to the backend.
 
 ## Recent Changes
-- November 2024: Initial project setup
-- Created FastAPI backend with authentication
-- Added periodic table data for all 118 elements
-- Built React frontend with Login, Signup, and Chat pages
-- Integrated OpenRouter API for AI-powered chemistry facts
-- Added /api prefix to all backend routes with Vite proxy configuration
+- November 2024: Initial project setup with authentication system
+- Deployed to Render with merged frontend/backend
+- Fixed login error handling - shows error messages instead of page refresh
+- Added email-validator dependency for email validation
+- **Major Design Overhaul**: Modernized UI with:
+  - Animated gradient background (purple, pink, blue)
+  - Glassmorphism effects with premium feel
+  - Enhanced typography and spacing
+  - Smooth animations and transitions
+  - Premium shadows and depth effects
+  - Responsive mobile-friendly design
