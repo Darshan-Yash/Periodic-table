@@ -309,15 +309,28 @@ print(f"📍 Backend dir: {backend_dir}")
 print(f"📍 Root dir: {root_dir}")
 print(f"📍 Frontend dist path: {frontend_dist_path}")
 
-if os.path.exists(frontend_dist_path):
-    index_path = os.path.join(frontend_dist_path, "index.html")
-    if os.path.exists(index_path):
-        print(f"✓ Mounting static files from: {frontend_dist_path}")
-        app.mount("/", StaticFiles(directory=frontend_dist_path, html=True), name="static")
-    else:
-        print(f"✗ index.html not found at: {index_path}")
+if os.path.exists(frontend_dist_path) and os.path.exists(os.path.join(frontend_dist_path, "index.html")):
+    print(f"✓ Found frontend dist at: {frontend_dist_path}")
+    # Mount static files for assets (JS, CSS, etc)
+    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dist_path, "assets")), name="assets")
+    
+    # Catch-all route for SPA - serve index.html for all non-API routes
+    @app.get("/{full_path:path}")
+    async def serve_frontend(full_path: str):
+        # Don't interfere with API routes or static assets
+        if full_path.startswith("api/") or full_path.startswith("assets/"):
+            raise HTTPException(status_code=404, detail="Not found")
+        return FileResponse(os.path.join(frontend_dist_path, "index.html"))
+    
+    # Root path handler
+    @app.get("/")
+    async def serve_root():
+        return FileResponse(os.path.join(frontend_dist_path, "index.html"))
 else:
-    print(f"✗ Frontend dist path not found: {frontend_dist_path}")
+    print(f"✗ Frontend not ready at: {frontend_dist_path}")
+    @app.get("/")
+    async def no_frontend():
+        return {"message": "Frontend not built. Please check build process."}
 
 if __name__ == "__main__":
     import uvicorn
