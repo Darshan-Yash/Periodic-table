@@ -57,10 +57,6 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
 - Deployed to Render with merged frontend/backend
 - Fixed login error handling - shows error messages instead of page refresh
 - Added email-validator dependency for email validation
-- **Major Design Overhaul**: Modernized UI with:
-  - Animated gradient background (purple, pink, blue)
-  - Glassmorphism effects with premium feel
-  - Enhanced typography and spacing
-  - Smooth animations and transitions
-  - Premium shadows and depth effects
-  - Responsive mobile-friendly design
+- Replaced modern glassmorphism design with clean, classic UI
+- Simplified styling: removed animations, gradients, and fancy effects
+- Final design: Professional minimalist interface with blue accents
