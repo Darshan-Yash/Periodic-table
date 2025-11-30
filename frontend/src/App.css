@@ -48,7 +48,7 @@ html, body {
 }
 
 .auth-card {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.4);
   border-radius: 8px;
   padding: 40px;
   width: 100%;
