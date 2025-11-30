@@ -6,7 +6,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException, Depends, status, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, EmailStr
 from passlib.hash import pbkdf2_sha256
@@ -325,7 +325,15 @@ if os.path.exists(index_html_path):
         if full_path.startswith("api/"):
             raise HTTPException(status_code=404, detail="Not found")
         # Serve index.html for all other routes (SPA routing)
-        return FileResponse(index_html_path)
+        return FileResponse(
+            index_html_path,
+            media_type="text/html",
+            headers={
+                "Cache-Control": "no-cache, no-store, must-revalidate",
+                "Pragma": "no-cache",
+                "Expires": "0"
+            }
+        )
 else:
     print(f"✗ Frontend dist not found at: {frontend_dist_path}")
 
