@@ -310,6 +310,16 @@ if os.path.exists(assets_path):
     print(f"✓ Mounting assets from: {assets_path}")
     app.mount("/assets", StaticFiles(directory=assets_path), name="assets")
 
+# Mount images from dist folder at root for production
+if os.path.exists(frontend_dist_path):
+    # Mount PNG images to root
+    @app.get("/{filename}.png")
+    async def serve_image(filename: str):
+        image_path = os.path.join(frontend_dist_path, f"{filename}.png")
+        if os.path.exists(image_path):
+            return FileResponse(image_path)
+        raise HTTPException(status_code=404, detail="Not found")
+
 # Catch-all SPA router - must be last to avoid conflicts
 if os.path.exists(index_html_path):
     print(f"✓ Serving SPA from: {index_html_path}")
