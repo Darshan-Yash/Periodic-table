@@ -3,7 +3,7 @@ import json
 import httpx
 from datetime import datetime, timedelta
 from typing import Optional
-from fastapi import FastAPI, HTTPException, Depends, status, APIRouter
+from fastapi import FastAPI, HTTPException, Depends, status, APIRouter, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -304,33 +304,30 @@ app.include_router(router)
 backend_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(backend_dir)
 frontend_dist_path = os.path.join(root_dir, "frontend", "dist")
+assets_path = os.path.join(frontend_dist_path, "assets")
+index_html_path = os.path.join(frontend_dist_path, "index.html")
 
 print(f"📍 Backend dir: {backend_dir}")
 print(f"📍 Root dir: {root_dir}")
 print(f"📍 Frontend dist path: {frontend_dist_path}")
 
-if os.path.exists(frontend_dist_path) and os.path.exists(os.path.join(frontend_dist_path, "index.html")):
-    print(f"✓ Found frontend dist at: {frontend_dist_path}")
-    # Mount static files for assets (JS, CSS, etc)
-    app.mount("/assets", StaticFiles(directory=os.path.join(frontend_dist_path, "assets")), name="assets")
+if os.path.exists(assets_path):
+    print(f"✓ Mounting assets from: {assets_path}")
+    app.mount("/assets", StaticFiles(directory=assets_path), name="assets")
+
+# Catch-all SPA router - must be last to avoid conflicts
+if os.path.exists(index_html_path):
+    print(f"✓ Serving SPA from: {index_html_path}")
     
-    # Catch-all route for SPA - serve index.html for all non-API routes
-    @app.get("/{full_path:path}")
-    async def serve_frontend(full_path: str):
-        # Don't interfere with API routes or static assets
-        if full_path.startswith("api/") or full_path.startswith("assets/"):
+    @app.api_route("/{full_path:path}", methods=["GET", "HEAD"])
+    async def spa_fallback(full_path: str, request: Request):
+        # Skip API routes and assets - let them be handled by router
+        if full_path.startswith("api/"):
             raise HTTPException(status_code=404, detail="Not found")
-        return FileResponse(os.path.join(frontend_dist_path, "index.html"))
-    
-    # Root path handler
-    @app.get("/")
-    async def serve_root():
-        return FileResponse(os.path.join(frontend_dist_path, "index.html"))
+        # Serve index.html for all other routes (SPA routing)
+        return FileResponse(index_html_path)
 else:
-    print(f"✗ Frontend not ready at: {frontend_dist_path}")
-    @app.get("/")
-    async def no_frontend():
-        return {"message": "Frontend not built. Please check build process."}
+    print(f"✗ Frontend dist not found at: {frontend_dist_path}")
 
 if __name__ == "__main__":
     import uvicorn
