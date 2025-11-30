@@ -3,7 +3,7 @@ import json
 import httpx
 from datetime import datetime, timedelta
 from typing import Optional
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import FastAPI, HTTPException, Depends, status, APIRouter
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel, EmailStr
@@ -22,6 +22,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+router = APIRouter(prefix="/api")
 security = HTTPBearer()
 
 SECRET_KEY = os.environ.get("SESSION_SECRET", "fallback-secret-key")
@@ -126,7 +127,7 @@ async def root():
     return {"message": "Periodic Table Facts Bot API"}
 
 
-@app.post("/signup", response_model=TokenResponse)
+@router.post("/signup", response_model=TokenResponse)
 async def signup(user: UserSignup):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -156,7 +157,7 @@ async def signup(user: UserSignup):
     return TokenResponse(access_token=access_token)
 
 
-@app.post("/login", response_model=TokenResponse)
+@router.post("/login", response_model=TokenResponse)
 async def login(user: UserLogin):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -179,7 +180,7 @@ async def login(user: UserLogin):
     return TokenResponse(access_token=access_token)
 
 
-@app.get("/me", response_model=UserResponse)
+@router.get("/me", response_model=UserResponse)
 async def get_current_user(email: str = Depends(verify_token)):
     conn = get_db_connection()
     cur = conn.cursor()
@@ -198,12 +199,12 @@ async def get_current_user(email: str = Depends(verify_token)):
     return UserResponse(id=user["id"], email=user["email"])
 
 
-@app.get("/elements")
+@router.get("/elements")
 async def get_all_elements():
     return ELEMENTS
 
 
-@app.get("/elements/{identifier}")
+@router.get("/elements/{identifier}")
 async def get_element(identifier: str):
     identifier_lower = identifier.lower()
     
@@ -219,7 +220,7 @@ async def get_element(identifier: str):
     )
 
 
-@app.post("/ask")
+@router.post("/ask")
 async def ask_question(question: AskQuestion, email: str = Depends(verify_token)):
     if not OPENROUTER_API_KEY:
         raise HTTPException(
@@ -294,6 +295,8 @@ If element data is provided, use it to give accurate information."""
                 detail=str(e)
             )
 
+
+app.include_router(router)
 
 if __name__ == "__main__":
     import uvicorn
