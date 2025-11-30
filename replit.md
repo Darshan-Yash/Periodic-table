@@ -5,7 +5,6 @@ A local Periodic Table Facts Bot with JWT authentication, Neon PostgreSQL databa
 
 ## Project Structure
 ```
-periodic-facts-bot/
 ├── backend/
 │   ├── main.py          # FastAPI backend with all endpoints
 │   └── elements.json    # Complete periodic table data (118 elements)
@@ -30,13 +29,13 @@ periodic-facts-bot/
 - **AI Chat**: Ask chemistry questions powered by OpenRouter API
 - **Modern UI**: React frontend with responsive design
 
-## API Endpoints
-- `POST /signup` - Create new user account
-- `POST /login` - Authenticate user
-- `GET /me` - Get current user info (protected)
-- `GET /elements` - Get all elements
-- `GET /elements/{identifier}` - Get element by symbol or name
-- `POST /ask` - Ask AI a chemistry question (protected)
+## API Endpoints (all prefixed with /api)
+- `POST /api/signup` - Create new user account
+- `POST /api/login` - Authenticate user
+- `GET /api/me` - Get current user info (protected)
+- `GET /api/elements` - Get all elements
+- `GET /api/elements/{identifier}` - Get element by symbol or name
+- `POST /api/ask` - Ask AI a chemistry question (protected)
 
 ## Environment Variables Required
 - `DATABASE_URL` - PostgreSQL connection string (automatically set)
@@ -51,11 +50,12 @@ periodic-facts-bot/
 
 ## Running the Application
 The application runs both backend (port 8000) and frontend (port 5000) together.
-Frontend is accessible via the webview.
+Frontend is accessible via the webview. The Vite dev server proxies /api requests to the backend.
 
 ## Recent Changes
-- Initial project setup (November 2024)
+- November 2024: Initial project setup
 - Created FastAPI backend with authentication
 - Added periodic table data for all 118 elements
 - Built React frontend with Login, Signup, and Chat pages
 - Integrated OpenRouter API for AI-powered chemistry facts
+- Added /api prefix to all backend routes with Vite proxy configuration
