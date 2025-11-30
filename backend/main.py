@@ -124,11 +124,6 @@ async def startup_event():
     init_db()
 
 
-@app.get("/")
-async def root():
-    return {"message": "Periodic Table Facts Bot API"}
-
-
 @router.post("/signup", response_model=TokenResponse)
 async def signup(user: UserSignup):
     conn = get_db_connection()
