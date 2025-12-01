@@ -244,9 +244,22 @@ async def analyze_media(file: UploadFile = File(...), email: str = Depends(verif
             raise HTTPException(status_code=500, detail="OpenRouter API key not configured")
         
         # Build vision prompt for chemistry analysis
-        analysis_prompt = f"""Analyze this {'image' if content_type == 'image' else 'video'} from a chemistry perspective and provide insights about any chemical concepts, elements, reactions, or laboratory equipment visible. 
-If this is related to chemistry elements, try to identify them and provide interesting facts.
-Keep the response concise and educational, suitable for chemistry students."""
+        analysis_prompt = f"""Analyze this {'image' if content_type == 'image' else 'video'} from a chemistry perspective and provide a clear, educational explanation suitable for high school/college students.
+
+IMPORTANT FORMAT GUIDELINES:
+1. Start with a CLEAR TITLE identifying what's shown
+2. Break down your explanation into SHORT, numbered steps
+3. Use simple language - explain like teaching a student
+4. For equations: 
+   - Show the UNBALANCED equation first
+   - Number each balancing step (Step 1, Step 2, etc)
+   - Show the work for each step clearly
+   - Show the FINAL balanced equation
+5. Include KEY FACTS about the chemicals involved (not more than 3)
+6. End with WHY THIS MATTERS (real-world application)
+7. Use line breaks to separate sections for readability
+
+Keep total response under 400 words but make it CLEAR and WELL-ORGANIZED."""
         
         async with httpx.AsyncClient() as client:
             # Use GPT-4o for vision analysis (available on OpenRouter)

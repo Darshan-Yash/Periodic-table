@@ -86,3 +86,5 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
   - Chemistry-focused prompts: Analyzes elements, reactions, lab equipment in images
   - Supports: JPEG, PNG, GIF, WebP (images) and MP4, AVI, MOV, MKV (videos)
   - Analysis results displayed in chat with upload confirmation message
+  - **Improved: Clear step-by-step explanations optimized for student understanding**
+  - **Format: Numbered steps, simple language, KEY FACTS, real-world applications**
