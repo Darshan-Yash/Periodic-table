@@ -76,3 +76,4 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
   - Backend detects keywords: "periodic table", "all elements", "view elements", "show table", etc.
   - Fixed static file serving to properly display images in chat
   - Added image display support in Chat component with responsive styling
+  - Updated button to open periodic table image in new window (window.open)

@@ -9,7 +9,6 @@ function Chat() {
   const [loading, setLoading] = useState(false);
   const [elementSearch, setElementSearch] = useState('');
   const [elementInfo, setElementInfo] = useState(null);
-  const [modalImage, setModalImage] = useState(null);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
@@ -142,7 +141,7 @@ function Chat() {
                     <div className="image-link-container">
                       <button 
                         className="periodic-table-link"
-                        onClick={() => setModalImage(msg.imageUrl)}
+                        onClick={() => window.open(msg.imageUrl, '_blank')}
                       >
                         📊 Elements of Periodic Table
                       </button>
@@ -178,14 +177,6 @@ function Chat() {
         </main>
       </div>
 
-      {modalImage && (
-        <div className="modal-overlay" onClick={() => setModalImage(null)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={() => setModalImage(null)}>✕</button>
-            <img src={modalImage} alt="periodic table" className="modal-image" />
-          </div>
-        </div>
-      )}
     </div>
   );
 }
