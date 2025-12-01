@@ -46,7 +46,8 @@ function Chat() {
       setMessages(prev => [...prev, { 
         role: 'assistant', 
         content: response.answer,
-        elementContext: response.element_context
+        elementContext: response.element_context,
+        imageUrl: response.image_url
       }]);
     } catch (err) {
       setMessages(prev => [...prev, { 
@@ -136,6 +137,9 @@ function Chat() {
                   {msg.content.split('\n').map((line, i) => (
                     <p key={i}>{line}</p>
                   ))}
+                  {msg.imageUrl && (
+                    <img src={msg.imageUrl} alt="periodic table" className="message-image" />
+                  )}
                 </div>
               </div>
             ))}

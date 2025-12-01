@@ -219,6 +219,17 @@ async def get_element(identifier: str):
 
 @router.post("/ask")
 async def ask_question(question: AskQuestion, email: str = Depends(verify_token)):
+    question_lower = question.question.lower()
+    
+    # Check if user is asking about the periodic table
+    periodic_keywords = ["periodic table", "all elements", "view elements", "show table", "complete table", "118 elements"]
+    if any(keyword in question_lower for keyword in periodic_keywords):
+        return {
+            "answer": "Here's the complete periodic table of all 118 elements!",
+            "image_url": "/periodic-table.png",
+            "element_context": None
+        }
+    
     if not OPENROUTER_API_KEY:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -226,7 +237,6 @@ async def ask_question(question: AskQuestion, email: str = Depends(verify_token)
         )
     
     element_context = ""
-    question_lower = question.question.lower()
     
     for symbol, element in ELEMENTS_BY_SYMBOL.items():
         if symbol in question_lower or element["name"].lower() in question_lower:
