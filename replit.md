@@ -28,6 +28,7 @@ A local Periodic Table Facts Bot with JWT authentication, Neon PostgreSQL databa
 - **Element Lookup**: Search any element by symbol or name
 - **AI Chat**: Ask chemistry questions powered by OpenRouter API
 - **Periodic Table Image**: Ask to "view periodic table" or "show all elements" to get a complete periodic table image
+- **Image/Video Analysis**: Upload images or videos to get chemistry-focused AI analysis using vision models
 - **Modern UI**: React frontend with responsive design with chemistry-themed backgrounds
 
 ## API Endpoints (all prefixed with /api)
@@ -37,6 +38,7 @@ A local Periodic Table Facts Bot with JWT authentication, Neon PostgreSQL databa
 - `GET /api/elements` - Get all elements
 - `GET /api/elements/{identifier}` - Get element by symbol or name
 - `POST /api/ask` - Ask AI a chemistry question (protected); returns periodic table image when asking about all elements
+- `POST /api/analyze-media` - Analyze uploaded image or video using vision AI (protected)
 - `GET /{filename}.png` - Serve periodic table and background images
 
 ## Environment Variables Required
@@ -77,3 +79,10 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
   - Fixed static file serving to properly display images in chat
   - Added image display support in Chat component with responsive styling
   - Updated button to open periodic table image in new window (window.open)
+- December 1, 2025: Added Image/Video Upload Feature:
+  - Backend endpoint `/api/analyze-media` accepts image/video file uploads
+  - Uses Qwen2.5 VL 32B (free vision model on OpenRouter) for AI analysis
+  - Frontend: File upload button (📁) with analysis confirmation
+  - Chemistry-focused prompts: Analyzes elements, reactions, lab equipment in images
+  - Supports: JPEG, PNG, GIF, WebP (images) and MP4, AVI, MOV, MKV (videos)
+  - Analysis results displayed in chat with upload confirmation message

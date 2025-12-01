@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getCurrentUser, askQuestion, getElement } from '../api/api';
+import { getCurrentUser, askQuestion, getElement, analyzeMedia } from '../api/api';
 
 function Chat() {
   const [user, setUser] = useState(null);
@@ -9,7 +9,9 @@ function Chat() {
   const [loading, setLoading] = useState(false);
   const [elementSearch, setElementSearch] = useState('');
   const [elementInfo, setElementInfo] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState(null);
   const messagesEndRef = useRef(null);
+  const fileInputRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -75,6 +77,40 @@ function Chat() {
   const handleLogout = () => {
     localStorage.removeItem('token');
     navigate('/login');
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadedFile(file);
+    }
+  };
+
+  const handleFileUpload = async (e) => {
+    e.preventDefault();
+    if (!uploadedFile || loading) return;
+
+    const fileName = uploadedFile.name;
+    setMessages(prev => [...prev, { role: 'user', content: `📤 Uploaded: ${fileName}` }]);
+    setUploadedFile(null);
+    setLoading(true);
+
+    try {
+      const result = await analyzeMedia(uploadedFile);
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: result.analysis
+      }]);
+    } catch (err) {
+      setMessages(prev => [...prev, { 
+        role: 'assistant', 
+        content: err.response?.data?.detail || 'Sorry, I could not analyze the file. Please try again.',
+        isError: true
+      }]);
+    } finally {
+      setLoading(false);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+    }
   };
 
   if (!user) {
@@ -170,9 +206,38 @@ function Chat() {
               placeholder="Ask about any element or chemistry topic..."
               disabled={loading}
             />
-            <button type="submit" disabled={loading || !input.trim()}>
-              Send
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*,video/*"
+              onChange={handleFileChange}
+              disabled={loading}
+              style={{ display: 'none' }}
+            />
+            <button 
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              disabled={loading}
+              className="file-upload-btn"
+              title="Upload image or video for analysis"
+            >
+              📁
             </button>
+            {uploadedFile && (
+              <button 
+                type="button"
+                onClick={handleFileUpload}
+                disabled={loading}
+                className="send-file-btn"
+              >
+                Analyze {uploadedFile.name.split('.').pop().toUpperCase()}
+              </button>
+            )}
+            {!uploadedFile && (
+              <button type="submit" disabled={loading || !input.trim()}>
+                Send
+              </button>
+            )}
           </form>
         </main>
       </div>

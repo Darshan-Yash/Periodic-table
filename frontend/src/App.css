@@ -613,6 +613,31 @@ html, body {
   cursor: not-allowed;
 }
 
+.file-upload-btn {
+  padding: 14px 16px !important;
+  width: 48px;
+  min-width: 48px;
+  background: #f0f4ff !important;
+  color: #667eea !important;
+  border: 2px solid #667eea !important;
+  font-size: 1.2rem !important;
+  font-weight: bold !important;
+}
+
+.file-upload-btn:hover:not(:disabled) {
+  background: #e8ecff !important;
+}
+
+.send-file-btn {
+  padding: 14px 20px !important;
+  background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+  font-size: 0.95rem !important;
+}
+
+.send-file-btn:hover:not(:disabled) {
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.3) !important;
+}
+
 .loading {
   display: flex;
   align-items: center;

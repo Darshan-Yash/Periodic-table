@@ -1,9 +1,10 @@
 import os
 import json
 import httpx
+import base64
 from datetime import datetime, timedelta
 from typing import Optional
-from fastapi import FastAPI, HTTPException, Depends, status, APIRouter, Request
+from fastapi import FastAPI, HTTPException, Depends, status, APIRouter, Request, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, HTMLResponse
@@ -53,6 +54,10 @@ class UserLogin(BaseModel):
 
 class AskQuestion(BaseModel):
     question: str
+
+
+class ImageAnalysisRequest(BaseModel):
+    analysis_type: str = "general"
 
 
 class TokenResponse(BaseModel):
@@ -215,6 +220,73 @@ async def get_element(identifier: str):
         status_code=status.HTTP_404_NOT_FOUND,
         detail=f"Element '{identifier}' not found"
     )
+
+
+@router.post("/analyze-media")
+async def analyze_media(file: UploadFile = File(...), email: str = Depends(verify_token)):
+    """Analyze uploaded image or video using vision AI"""
+    try:
+        contents = await file.read()
+        base64_data = base64.b64encode(contents).decode("utf-8")
+        
+        # Determine media type
+        filename_lower = file.filename.lower()
+        if filename_lower.endswith(('.jpg', '.jpeg', '.png', '.gif', '.webp')):
+            media_type = "image/jpeg" if filename_lower.endswith(('.jpg', '.jpeg')) else "image/png"
+            content_type = "image"
+        elif filename_lower.endswith(('.mp4', '.avi', '.mov', '.mkv')):
+            media_type = "video/mp4"
+            content_type = "video"
+        else:
+            raise HTTPException(status_code=400, detail="Unsupported file format")
+        
+        if not OPENROUTER_API_KEY:
+            raise HTTPException(status_code=500, detail="OpenRouter API key not configured")
+        
+        # Build vision prompt for chemistry analysis
+        analysis_prompt = f"""Analyze this {'image' if content_type == 'image' else 'video'} from a chemistry perspective and provide insights about any chemical concepts, elements, reactions, or laboratory equipment visible. 
+If this is related to chemistry elements, try to identify them and provide interesting facts.
+Keep the response concise and educational, suitable for chemistry students."""
+        
+        async with httpx.AsyncClient() as client:
+            # Use Qwen2.5 VL for vision analysis (free model on OpenRouter)
+            response = await client.post(
+                "https://openrouter.ai/api/v1/chat/completions",
+                headers={
+                    "Authorization": f"Bearer {OPENROUTER_API_KEY}",
+                    "Content-Type": "application/json",
+                    "HTTP-Referer": "https://periodic-facts-bot.replit.app",
+                    "X-Title": "Periodic Table Facts Bot"
+                },
+                json={
+                    "model": "qwen/qwen2.5-vl-32b-instruct:free",
+                    "messages": [{
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": analysis_prompt},
+                            {"type": "image_url", "image_url": {"url": f"data:{media_type};base64,{base64_data}"}}
+                        ]
+                    }],
+                    "max_tokens": 500,
+                    "temperature": 0.7
+                },
+                timeout=60.0
+            )
+            
+            if response.status_code != 200:
+                raise HTTPException(status_code=500, detail=f"Vision API error: {response.text}")
+            
+            data = response.json()
+            analysis = data["choices"][0]["message"]["content"]
+            
+            return {
+                "analysis": analysis,
+                "file_name": file.filename,
+                "file_type": content_type
+            }
+    
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error analyzing media: {str(e)}")
 
 
 @router.post("/ask")
