@@ -292,10 +292,16 @@ Keep total response under 400 words but make it CLEAR and WELL-ORGANIZED."""
             data = response.json()
             analysis = data["choices"][0]["message"]["content"]
             
+            # For images, include the base64 data for display
+            image_data = None
+            if content_type == "image":
+                image_data = f"data:{media_type};base64,{base64_data}"
+            
             return {
                 "analysis": analysis,
                 "file_name": file.filename,
-                "file_type": content_type
+                "file_type": content_type,
+                "image_data": image_data
             }
     
     except Exception as e:

@@ -91,7 +91,23 @@ function Chat() {
     if (!uploadedFile || loading) return;
 
     const fileName = uploadedFile.name;
-    setMessages(prev => [...prev, { role: 'user', content: `📤 Uploaded: ${fileName}` }]);
+    
+    // Create local preview for images
+    let previewData = null;
+    if (uploadedFile.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        // This is handled in the display section
+      };
+      reader.readAsDataURL(uploadedFile);
+      previewData = URL.createObjectURL(uploadedFile);
+    }
+    
+    setMessages(prev => [...prev, { 
+      role: 'user', 
+      content: `📤 Uploaded: ${fileName}`,
+      uploadedImagePreview: previewData
+    }]);
     setUploadedFile(null);
     setLoading(true);
 
@@ -99,7 +115,8 @@ function Chat() {
       const result = await analyzeMedia(uploadedFile);
       setMessages(prev => [...prev, { 
         role: 'assistant', 
-        content: result.analysis
+        content: result.analysis,
+        uploadedImage: result.image_data
       }]);
     } catch (err) {
       setMessages(prev => [...prev, { 
@@ -170,9 +187,19 @@ function Chat() {
             {messages.map((msg, idx) => (
               <div key={idx} className={`message ${msg.role} ${msg.isError ? 'error' : ''}`}>
                 <div className="message-content">
+                  {msg.uploadedImagePreview && (
+                    <div className="uploaded-image-container">
+                      <img src={msg.uploadedImagePreview} alt="uploaded" className="uploaded-image" />
+                    </div>
+                  )}
                   {msg.content.split('\n').map((line, i) => (
                     <p key={i}>{line}</p>
                   ))}
+                  {msg.uploadedImage && (
+                    <div className="uploaded-image-container">
+                      <img src={msg.uploadedImage} alt="analysis" className="uploaded-image" />
+                    </div>
+                  )}
                   {msg.imageUrl && (
                     <div className="image-link-container">
                       <button 

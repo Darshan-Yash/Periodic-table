@@ -88,3 +88,5 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
   - Analysis results displayed in chat with upload confirmation message
   - **Improved: Clear step-by-step explanations optimized for student understanding**
   - **Format: Numbered steps, simple language, KEY FACTS, real-world applications**
+  - **Image Display: Uploaded images shown in chat for visual reference**
+  - Backend returns base64 image data, frontend displays with responsive sizing
