@@ -9,6 +9,7 @@ function Chat() {
   const [loading, setLoading] = useState(false);
   const [elementSearch, setElementSearch] = useState('');
   const [elementInfo, setElementInfo] = useState(null);
+  const [expandedImageIdx, setExpandedImageIdx] = useState(null);
   const messagesEndRef = useRef(null);
   const navigate = useNavigate();
 
@@ -138,7 +139,17 @@ function Chat() {
                     <p key={i}>{line}</p>
                   ))}
                   {msg.imageUrl && (
-                    <img src={msg.imageUrl} alt="periodic table" className="message-image" />
+                    <div className="image-link-container">
+                      <button 
+                        className="periodic-table-link"
+                        onClick={() => setExpandedImageIdx(expandedImageIdx === idx ? null : idx)}
+                      >
+                        📊 Elements of Periodic Table
+                      </button>
+                      {expandedImageIdx === idx && (
+                        <img src={msg.imageUrl} alt="periodic table" className="message-image" />
+                      )}
+                    </div>
                   )}
                 </div>
               </div>

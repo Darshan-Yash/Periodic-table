@@ -430,14 +430,45 @@ html, body {
   margin-bottom: 0;
 }
 
+.image-link-container {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.periodic-table-link {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  align-self: flex-start;
+}
+
+.periodic-table-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+.periodic-table-link:active {
+  transform: translateY(0);
+}
+
 .message-image {
   max-width: 100%;
   width: 100%;
-  max-height: 500px;
+  max-height: 600px;
   border-radius: 8px;
-  margin-top: 12px;
+  margin-top: 8px;
   object-fit: contain;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease;
 }
 
 .typing-indicator {
