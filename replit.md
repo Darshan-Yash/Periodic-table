@@ -27,7 +27,8 @@ A local Periodic Table Facts Bot with JWT authentication, Neon PostgreSQL databa
 - **Secure Passwords**: Password hashing using pbkdf2_sha256
 - **Element Lookup**: Search any element by symbol or name
 - **AI Chat**: Ask chemistry questions powered by OpenRouter API
-- **Modern UI**: React frontend with responsive design
+- **Periodic Table Image**: Ask to "view periodic table" or "show all elements" to get a complete periodic table image
+- **Modern UI**: React frontend with responsive design with chemistry-themed backgrounds
 
 ## API Endpoints (all prefixed with /api)
 - `POST /api/signup` - Create new user account
@@ -35,7 +36,8 @@ A local Periodic Table Facts Bot with JWT authentication, Neon PostgreSQL databa
 - `GET /api/me` - Get current user info (protected)
 - `GET /api/elements` - Get all elements
 - `GET /api/elements/{identifier}` - Get element by symbol or name
-- `POST /api/ask` - Ask AI a chemistry question (protected)
+- `POST /api/ask` - Ask AI a chemistry question (protected); returns periodic table image when asking about all elements
+- `GET /{filename}.png` - Serve periodic table and background images
 
 ## Environment Variables Required
 - `DATABASE_URL` - PostgreSQL connection string (automatically set)
@@ -69,3 +71,8 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
   - Improved typography and button styling throughout
   - Added slide-in animations for chat messages
   - Enhanced sidebar with gradient background and better styling
+- December 1, 2025: Added Periodic Table Feature:
+  - Generated and integrated periodic table image
+  - Backend detects keywords: "periodic table", "all elements", "view elements", "show table", etc.
+  - Fixed static file serving to properly display images in chat
+  - Added image display support in Chat component with responsive styling
