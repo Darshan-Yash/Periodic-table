@@ -249,7 +249,7 @@ If this is related to chemistry elements, try to identify them and provide inter
 Keep the response concise and educational, suitable for chemistry students."""
         
         async with httpx.AsyncClient() as client:
-            # Use Llama 3.2 11B Vision for vision analysis (free model on OpenRouter)
+            # Use GPT-4o for vision analysis (available on OpenRouter)
             response = await client.post(
                 "https://openrouter.ai/api/v1/chat/completions",
                 headers={
@@ -259,7 +259,7 @@ Keep the response concise and educational, suitable for chemistry students."""
                     "X-Title": "Periodic Table Facts Bot"
                 },
                 json={
-                    "model": "meta-llama/llama-3.2-11b-vision-instruct:free",
+                    "model": "openai/gpt-4o",
                     "messages": [{
                         "role": "user",
                         "content": [

@@ -81,7 +81,7 @@ Frontend is accessible via the webview. The Vite dev server proxies /api request
   - Updated button to open periodic table image in new window (window.open)
 - December 1, 2025: Added Image/Video Upload Feature:
   - Backend endpoint `/api/analyze-media` accepts image/video file uploads
-  - Uses Llama 3.2 11B Vision (free model on OpenRouter) for AI analysis
+  - Uses GPT-4o vision model on OpenRouter for AI analysis
   - Frontend: File upload button (📁) with analysis confirmation
   - Chemistry-focused prompts: Analyzes elements, reactions, lab equipment in images
   - Supports: JPEG, PNG, GIF, WebP (images) and MP4, AVI, MOV, MKV (videos)
